@@ -1,6 +1,9 @@
+
 local map = vim.api.nvim_set_keymap
 
 local config = {
+  colorscheme = 'deep-space',
+
   polish = function ()
     map("n", "<a-1>", "<cmd>ToggleTermToggleAll<cr>", {})
 
@@ -16,6 +19,8 @@ local config = {
   
   plugins = {
     init = {
+      { "romainl/flattened" },
+      { "tyrannicaltoucan/vim-deep-space" },
       { 
         "MunifTanjim/prettier.nvim",
         config = function()
