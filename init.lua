@@ -1,5 +1,5 @@
-
 local map = vim.api.nvim_set_keymap
+local cmd = vim.api.nvim_command
 
 local config = {
   colorscheme = 'deep-space',
@@ -7,7 +7,9 @@ local config = {
   polish = function ()
     map("n", "<a-1>", "<cmd>ToggleTermToggleAll<cr>", {})
 
-    vim.api.nvim_command("language en_US")
+    cmd("language en_US")
+    cmd("set autoread")
+    cmd("au CursorHold * checktime")
 
     map("n", "<a-j>", ":m .+1<cr>==", {})   
     map("n", "<a-k>", ":m .-2<cr>==", {})
