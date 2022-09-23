@@ -1,26 +1,42 @@
-local map = vim.api.nvim_set_keymap
 local cmd = vim.api.nvim_command
 
 local config = {
   colorscheme = 'deep-space',
 
   polish = function ()
-    map("n", "<a-1>", "<cmd>ToggleTermToggleAll<cr>", {})
-
     cmd("language en_US")
     cmd("set autoread")
     cmd("au CursorHold * checktime")
-
-    map("n", "<a-j>", ":m .+1<cr>==", {})   
-    map("n", "<a-k>", ":m .-2<cr>==", {})
-    map("i", "<a-j>", "<Esc>:m .+1<cr>==gi", {})
-    map("i", "<a-k>", "<Esc>:m .-2<cr>==gi", {})
-    map("v", "<a-j>", ":m '>+1<cr>gv=gv", {})
-    map("v", "<a-k>", ":m '<-2<cr>gv=gv", {})
   end,
-  
+
+  options = {
+    opt = {
+    },
+    g = {
+      rustfmt_autosave = 1,
+    }
+  },
+
+  mappings = {
+    n = {
+      ["<a-1>"] = { "<cmd>ToggleTermToggleAll<cr>", desc = "Toggle all opened terminals" },
+      ["<a-j>"] = { ":m .+1<cr>==", desc = "Move bottom line at the cursor" },
+      ["<a-k>"] = { ":m .-2<cr>==", desc = "Move up line at the cursor" },
+    },
+    i = {
+      ["<a-j>"] = { "<Esc>:m .+1<cr>==gi", desc = "Move buttom line at the cursor" },
+      ["<a-k>"] = { "<Esc>:m .-2<cr>==gi", desc = "Move up line at the cursor" }
+    },
+    v = {
+      ["<a-j>"] = { ":m '>+1<cr>gv=gv", desc = "Move bottom selected lines" },
+      ["<a-k>"] = { ":m '<-2<cr>gv=gv", desc = "Move up selected lines" }
+    }
+  },
+
   plugins = {
     init = {
+      { "rust-lang-nursery/rustfmt" },
+      { "rust-lang/rust.vim" },
       { "romainl/flattened" },
       { "tyrannicaltoucan/vim-deep-space" },
       { 
@@ -34,7 +50,8 @@ local config = {
               "javascriptreact",
               "scss",
               "typescript",
-              "typescriptreact"
+              "typescriptreact",
+              "json"
             }
           }) 
         end
