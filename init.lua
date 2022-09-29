@@ -1,7 +1,7 @@
 local cmd = vim.api.nvim_command
 
 local config = {
-  colorscheme = 'deep-space',
+  colorscheme = 'tokyonight-night',
 
   polish = function ()
     cmd("language en_US")
@@ -37,9 +37,9 @@ local config = {
     init = {
       { "rust-lang-nursery/rustfmt" },
       { "rust-lang/rust.vim" },
-      { "romainl/flattened" },
+      { "folke/tokyonight.nvim" },
       { "tyrannicaltoucan/vim-deep-space" },
-      { 
+      {
         "MunifTanjim/prettier.nvim",
         config = function()
           require('prettier').setup({
@@ -53,7 +53,7 @@ local config = {
               "typescriptreact",
               "json"
             }
-          }) 
+          })
         end
       },
       {
@@ -69,7 +69,7 @@ local config = {
           visible = true,
           hide_dotfiles = false,
         }
-      } 
+      }
     },
     ["toggleterm"] = {
       size = 80,
