@@ -6,15 +6,14 @@ local config = {
   polish = function ()
     cmd("language en_US")
     cmd("set autoread")
+    cmd("set guicursor=n-i-v-c:ver25-iCursor")
     cmd("au CursorHold * checktime")
   end,
 
   options = {
-    opt = {
-    },
     g = {
       rustfmt_autosave = 1,
-    }
+    },
   },
 
   mappings = {
