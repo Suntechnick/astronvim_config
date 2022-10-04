@@ -21,6 +21,7 @@ local config = {
       ["<a-1>"] = { "<cmd>ToggleTermToggleAll<cr>", desc = "Toggle all opened terminals" },
       ["<a-j>"] = { ":m .+1<cr>==", desc = "Move bottom line at the cursor" },
       ["<a-k>"] = { ":m .-2<cr>==", desc = "Move up line at the cursor" },
+      ["<leader>r"] = { "<cmd>Cargo run<cr>", desc = "Cargo run" },
     },
     i = {
       ["<a-j>"] = { "<Esc>:m .+1<cr>==gi", desc = "Move buttom line at the cursor" },
@@ -29,6 +30,26 @@ local config = {
     v = {
       ["<a-j>"] = { ":m '>+1<cr>gv=gv", desc = "Move bottom selected lines" },
       ["<a-k>"] = { ":m '<-2<cr>gv=gv", desc = "Move up selected lines" }
+    }
+  },
+  -- TODO Remove this when filetype detection issue is fixed
+  updater = {
+    channel = "nightly",
+    branch = "fix-filetype-detection",
+    remote = "benvds",
+    remotes = {
+      ["benvds"] = "benvds/AstroNvim",
+    },
+  },
+
+  lsp = {
+    ['server-settings'] = {
+      tsserver= {
+        on_attach = function (client)
+          client.server_capabilities.documentFormattingProvider = false
+          client.server_capabilities.documentRangeFormattingProvider = false
+        end
+      }
     }
   },
 
