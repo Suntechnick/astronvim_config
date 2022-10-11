@@ -3,10 +3,9 @@ local cmd = vim.api.nvim_command
 local config = {
   colorscheme = 'tokyonight-night',
 
-  polish = function ()
+  polish = function()
     cmd("language en_US")
     cmd("set autoread")
-    cmd("set guicursor=n-i-v-c:ver25-iCursor")
     cmd("au CursorHold * checktime")
   end,
 
@@ -15,13 +14,12 @@ local config = {
       rustfmt_autosave = 1,
     },
   },
-
   mappings = {
     n = {
       ["<a-1>"] = { "<cmd>ToggleTermToggleAll<cr>", desc = "Toggle all opened terminals" },
       ["<a-j>"] = { ":m .+1<cr>==", desc = "Move bottom line at the cursor" },
       ["<a-k>"] = { ":m .-2<cr>==", desc = "Move up line at the cursor" },
-      ["<leader>r"] = { "<cmd>Cargo run<cr>", desc = "Cargo run" },
+      ["<leader>rr"] = { "<cmd>Cargo run<cr>", desc = "Cargo run" },
     },
     i = {
       ["<a-j>"] = { "<Esc>:m .+1<cr>==gi", desc = "Move buttom line at the cursor" },
@@ -29,30 +27,18 @@ local config = {
     },
     v = {
       ["<a-j>"] = { ":m '>+1<cr>gv=gv", desc = "Move bottom selected lines" },
-      ["<a-k>"] = { ":m '<-2<cr>gv=gv", desc = "Move up selected lines" }
+      ["<a-k>"] = { ":m '<-2<cr>gv=gv", desc = "Move up selected lines" },
     }
   },
-  -- TODO Remove this when filetype detection issue is fixed
-  updater = {
-    channel = "nightly",
-    branch = "fix-filetype-detection",
-    remote = "benvds",
-    remotes = {
-      ["benvds"] = "benvds/AstroNvim",
+  ['which-key'] = {
+    register = {
+      n = {
+        ["<leader>"] = {
+          r = { name = "Cargo" },
+        },
+      },
     },
   },
-
-  lsp = {
-    ['server-settings'] = {
-      tsserver= {
-        on_attach = function (client)
-          client.server_capabilities.documentFormattingProvider = false
-          client.server_capabilities.documentRangeFormattingProvider = false
-        end
-      }
-    }
-  },
-
   plugins = {
     init = {
       { "rust-lang-nursery/rustfmt" },
@@ -83,6 +69,22 @@ local config = {
         end
       }
     },
+    heirline = function(config)
+      config[1] = {
+        hl = { fg = "fg", bg = "bg" },
+        astronvim.status.component.mode { mode_text = { padding = { left = 1, right = 1 } } },
+        astronvim.status.component.git_branch(),
+        astronvim.status.component.file_info(),
+        astronvim.status.component.git_diff(),
+        astronvim.status.component.diagnostics(),
+        astronvim.status.component.fill(),
+        astronvim.status.component.lsp(),
+        astronvim.status.component.treesitter(),
+        astronvim.status.component.nav(),
+      }
+      config[2] = nil
+      return config
+    end,
     ["neo-tree"] = {
       filesystem = {
         filtered_items = {
@@ -97,22 +99,6 @@ local config = {
       shell = "powershell",
       close_on_exit = true,
     },
-    ["null-ls"] = function(config)
-      local null_ls = require "null-ls"
-      config.sources = {
-        null_ls.builtins.formatting.prettier,
-      }
-      config.on_attach = function(client)
-        if client.resolved_capabilities.document_formatting then
-          vim.api.nvim_create_autocmd("BufWritePre", {
-            desc = "Auto format before save",
-            pattern = "<buffer>",
-            callback = vim.lsp.buf.formatting_sync,
-          })
-        end
-      end
-      return config
-    end,
   }
 }
 
