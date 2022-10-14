@@ -19,7 +19,9 @@ local config = {
       ["<a-1>"] = { "<cmd>ToggleTermToggleAll<cr>", desc = "Toggle all opened terminals" },
       ["<a-j>"] = { ":m .+1<cr>==", desc = "Move bottom line at the cursor" },
       ["<a-k>"] = { ":m .-2<cr>==", desc = "Move up line at the cursor" },
+      ["<leader>i"] = { "<cmd>e ~/AppData/Local/nvim/lua/user/init.lua<cr>", desc = "Open AstroNvim init config" },
       ["<leader>rr"] = { "<cmd>Cargo run<cr>", desc = "Cargo run" },
+      ["<leader>rt"] = { "<cmd>Cargo test<cr>", desc = "Cargo test" },
     },
     i = {
       ["<a-j>"] = { "<Esc>:m .+1<cr>==gi", desc = "Move buttom line at the cursor" },
@@ -45,6 +47,12 @@ local config = {
       { "rust-lang/rust.vim" },
       { "folke/tokyonight.nvim" },
       { "tyrannicaltoucan/vim-deep-space" },
+      {
+        "ggandor/leap.nvim",
+        config = function()
+          require('leap').add_default_mappings()
+        end
+      },
       {
         "MunifTanjim/prettier.nvim",
         config = function()
