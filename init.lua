@@ -9,6 +9,10 @@ local config = {
     cmd("au CursorHold * checktime")
   end,
 
+  updater = {
+    channel = "nightly",
+  },
+
   options = {
     g = {
       rustfmt_autosave = 1,
@@ -54,26 +58,9 @@ local config = {
         end
       },
       {
-        "MunifTanjim/prettier.nvim",
+        "folke/todo-comments.nvim",
         config = function()
-          require('prettier').setup({
-            bin = 'prettier',
-            filetypes = {
-              "css",
-              "javascript",
-              "javascriptreact",
-              "scss",
-              "typescript",
-              "typescriptreact",
-              "json"
-            }
-          })
-        end
-      },
-      {
-        "MunifTanjim/eslint.nvim",
-        config = function()
-          require('eslint').setup({})
+          require('todo-comments').setup({})
         end
       }
     },
