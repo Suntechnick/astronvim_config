@@ -1,12 +1,25 @@
 local cmd = vim.api.nvim_command
+local ag = vim.api.nvim_create_augroup
+local au = vim.api.nvim_create_autocmd
 
 local config = {
   colorscheme = 'tokyonight-night',
 
   polish = function()
     cmd("language en_US")
+
+    -- Checks if file was changed while being opened in buffer
     cmd("set autoread")
     cmd("au CursorHold * checktime")
+
+    --- Highlight yanked text
+    au('TextYankPost', {
+      group = ag('yank_highlight', {}),
+      pattern = '*',
+      callback = function()
+        vim.highlight.on_yank { higroup = 'IncSearch', timeout = 1000 }
+      end,
+    })
   end,
 
   updater = {
