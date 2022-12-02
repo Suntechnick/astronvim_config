@@ -65,6 +65,12 @@ local config = {
       { "folke/tokyonight.nvim" },
       { "tyrannicaltoucan/vim-deep-space" },
       {
+        "petertriho/nvim-scrollbar",
+        config = function()
+          require("scrollbar").setup()
+        end
+      },
+      {
         "ggandor/leap.nvim",
         config = function()
           require('leap').add_default_mappings()
