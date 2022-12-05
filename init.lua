@@ -39,6 +39,8 @@ local config = {
       ["<leader>i"] = { "<cmd>e ~/AppData/Local/nvim/lua/user/init.lua<cr>", desc = "Open AstroNvim init config" },
       ["<leader>rr"] = { "<cmd>Cargo run<cr>", desc = "Cargo run" },
       ["<leader>rt"] = { "<cmd>Cargo test<cr>", desc = "Cargo test" },
+      ["<C-u>"] = { "<C-u>zz", desc = "Scroll top and center view" },
+      ["<C-d>"] = { "<C-d>zz", desc = "Scroll down and center view" }
     },
     i = {
       ["<a-j>"] = { "<Esc>:m .+1<cr>==gi", desc = "Move buttom line at the cursor" },
@@ -68,6 +70,7 @@ local config = {
         "petertriho/nvim-scrollbar",
         config = function()
           require("scrollbar").setup()
+          require("scrollbar.handlers.gitsigns").setup()
         end
       },
       {
