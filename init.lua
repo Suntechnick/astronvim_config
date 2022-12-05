@@ -22,10 +22,6 @@ local config = {
     })
   end,
 
-  updater = {
-    channel = "nightly",
-  },
-
   options = {
     g = {
       rustfmt_autosave = 1,
