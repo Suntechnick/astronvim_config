@@ -35,6 +35,7 @@ local config = {
       ["<leader>i"] = { "<cmd>e ~/AppData/Local/nvim/lua/user/init.lua<cr>", desc = "Open AstroNvim init config" },
       ["<leader>rr"] = { "<cmd>Cargo run<cr>", desc = "Cargo run" },
       ["<leader>rt"] = { "<cmd>Cargo test<cr>", desc = "Cargo test" },
+      ["<leader>rc"] = { "<cmd>Cargo check<cr>", desc = "Cargo check" },
       ["<C-u>"] = { "<C-u>zz", desc = "Scroll top and center view" },
       ["<C-d>"] = { "<C-d>zz", desc = "Scroll down and center view" }
     },
@@ -61,6 +62,7 @@ local config = {
       { "rust-lang-nursery/rustfmt" },
       { "rust-lang/rust.vim" },
       { "folke/tokyonight.nvim" },
+      { "shortcuts/no-neck-pain.nvim" },
       { "tyrannicaltoucan/vim-deep-space" },
       {
         "petertriho/nvim-scrollbar",
