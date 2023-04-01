@@ -20,6 +20,69 @@ return {
       return opts
     end,
   },
+  {
+    "rebelot/heirline.nvim",
+    opts = function(_, opts)
+      local status = require "astronvim.utils.status"
+      opts.statusline = { -- statusline
+        hl = { fg = "fg", bg = "bg" },
+        status.component.mode { mode_text = { padding = { left = 1, right = 1 } } }, -- add the mode text
+        status.component.git_branch(),
+        status.component.file_info { filetype = {}, filename = false, file_modified = false },
+        status.component.git_diff(),
+        status.component.diagnostics(),
+        status.component.fill(),
+        status.component.cmd_info(),
+        status.component.fill(),
+        status.component.lsp(),
+        status.component.treesitter(),
+        status.component.nav(),
+        -- remove the 2nd mode indicator on the right
+      }
+
+      opts.winbar = nil
+
+      -- return the final configuration table
+      return opts
+    end,
+  },
+  {
+    "lewis6991/gitsigns.nvim",
+    as = "gitsigns",
+    config = function()
+      require("scrollbar.handlers.gitsigns").setup()
+      require("gitsigns").setup()
+    end,
+  },
+  {
+    "folke/which-key.nvim",
+    config = function(plugin, opts)
+      require "plugins.configs.which-key"(plugin, opts) -- include the default astronvim config that calls the setup call
+      -- Add bindings which show up as group name
+      local wk = require "which-key"
+      wk.register({
+        n = { name = "My plugins" },
+        r = { name = "Cargo" },
+      }, { mode = "n", prefix = "<leader>" })
+    end,
+  },
+  {
+    "akinsho/toggleterm.nvim",
+    as = "toggleterm",
+    config = function()
+      require("toggleterm").setup {
+        shell = "powershell",
+        size = 10,
+        open_mapping = [[<F7>]],
+        shading_factor = 2,
+        direction = "float",
+        float_opts = {
+          border = "curved",
+          highlights = { border = "Normal", background = "Normal" },
+        },
+      }
+    end,
+  },
   -- You can disable default plugins as follows:
   -- { "max397574/better-escape.nvim", enabled = false },
   --
@@ -60,18 +123,6 @@ return {
   --       -- disable for .vim files, but it work for another filetypes
   --       Rule("a", "a", "-vim")
   --     )
-  --   end,
-  -- },
-  -- By adding to the which-key config and using our helper function you can add more which-key registered bindings
-  -- {
-  --   "folke/which-key.nvim",
-  --   config = function(plugin, opts)
-  --     require "plugins.configs.which-key"(plugin, opts) -- include the default astronvim config that calls the setup call
-  --     -- Add bindings which show up as group name
-  --     local wk = require "which-key"
-  --     wk.register({
-  --       b = { name = "Buffer" },
-  --     }, { mode = "n", prefix = "<leader>" })
   --   end,
   -- },
 }
